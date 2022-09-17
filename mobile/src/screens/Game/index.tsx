@@ -8,12 +8,14 @@ import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { THEME } from "../../theme";
 import logoImg from "../../assets/logo-nlw-esports.png";
-import { Header } from "../../components/Header";
+import { Heading } from "../../components/Heading";
 import { useNavigation } from "@react-navigation/native";
 import { DuoCard, DuoCardProps } from "../../components/DuoCard";
+import { DuoMatch } from "../../components/DuoMatch";
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
+  const [selectedDiscordDuo, setSelectedDiscordDuo] = useState("");
 
   const { goBack } = useNavigation();
   const route = useRoute();
@@ -27,6 +29,16 @@ export function Game() {
 
   function handleGoBack() {
     goBack();
+  }
+
+  function handleCloseModal() {
+    setSelectedDiscordDuo("");
+  }
+
+  async function getUserDiscord(adsId: string) {
+    fetch(`http://192.168.5.227:3333/ads/${adsId}/discord`)
+      .then((response) => response.json())
+      .then(({ discord }) => setSelectedDiscordDuo(discord));
   }
 
   return (
@@ -52,7 +64,7 @@ export function Game() {
           />
         </View>
 
-        <Header title={game.title} subtitle="Conecte-se e comece a jogar!" />
+        <Heading title={game.title} subtitle="Conecte-se e comece a jogar!" />
 
         <FlatList
           style={styles.containerList}
@@ -62,7 +74,7 @@ export function Game() {
           data={duos}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <DuoCard data={item} onConnect={() => {}} />
+            <DuoCard data={item} onConnect={() => getUserDiscord(item.id)} />
           )}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -71,6 +83,11 @@ export function Game() {
               Não há anúncios publicados ainda.
             </Text>
           )}
+        />
+        <DuoMatch
+          visible={selectedDiscordDuo.length > 0}
+          onClose={handleCloseModal}
+          discord={selectedDiscordDuo}
         />
       </SafeAreaView>
     </Background>

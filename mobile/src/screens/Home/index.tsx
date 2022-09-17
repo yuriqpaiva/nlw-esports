@@ -1,7 +1,7 @@
 import { FlatList, Image } from "react-native";
 import { styles } from "./styles";
 import logoImg from "../../assets/logo-nlw-esports.png";
-import { Header } from "../../components/Header";
+import { Heading } from "../../components/Heading";
 import { GameCard, GameCardProps } from "../../components/GameCard";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -27,7 +27,7 @@ export function Home() {
       <SafeAreaView style={styles.container}>
         <Image source={logoImg} style={styles.logo} />
 
-        <Header
+        <Heading
           title="Encontre seu duo!"
           subtitle="Selecione o game que deseja jogar..."
         />
