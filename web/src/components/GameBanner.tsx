@@ -15,11 +15,8 @@ export function GameBanner({
   index,
 }: GameBannerProps) {
   return (
-    <a
-      href=""
-      className={`relative group overflow-hidden rounded-lg keen-slider__slide number-slide${
-        index + 1
-      }`}
+    <div
+      className={`relative group overflow-hidden rounded-lg w-[180px] h-[240px] keen-slider__slide`}
     >
       <img
         src={bannerUrl}
@@ -31,6 +28,6 @@ export function GameBanner({
           {adsCount} anúncios(s)
         </span>
       </div>
-    </a>
+    </div>
   );
 }
