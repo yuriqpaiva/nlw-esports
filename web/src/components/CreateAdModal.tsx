@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { CaretDown, Check, GameController } from "phosphor-react";
+import { CaretDown, CaretUp, Check, GameController } from "phosphor-react";
 import { Input } from "./Form/Input";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { FormEvent, useEffect, useState } from "react";
@@ -55,8 +55,6 @@ export function CreateAdModal() {
     return selectedGame.title;
   }
 
-  console.log(gameId);
-
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
@@ -87,6 +85,9 @@ export function CreateAdModal() {
 
               <Select.Portal>
                 <Select.Content className="rounded p-2 bg-zinc-900 bg-opacity-[0.98] border-violet-500 border-2">
+                  <Select.ScrollUpButton>
+                    <CaretUp size={32} className="text-zinc-300" />
+                  </Select.ScrollUpButton>
                   <Select.Viewport className="flex flex-col gap-2">
                     {games.map((game) => {
                       return (
@@ -101,6 +102,9 @@ export function CreateAdModal() {
                       );
                     })}
                   </Select.Viewport>
+                  <Select.ScrollDownButton>
+                    <CaretDown size={32} className="text-zinc-300" />
+                  </Select.ScrollDownButton>
                 </Select.Content>
               </Select.Portal>
             </Select.Root>
