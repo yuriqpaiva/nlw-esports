@@ -87,7 +87,8 @@ export function GameSlider({ games }: GameSliderProps) {
           <button
             className="absolute -right-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)]"
             disabled={
-              instanceRef.current?.track.details?.maxIdx === currentSlide
+              instanceRef.current?.track.details?.maxIdx === currentSlide ||
+              instanceRef.current?.options?.slides?.perView >= games.length
             }
             onClick={(e: any) => {
               e.stopPropagation() || instanceRef.current?.next();
@@ -96,8 +97,9 @@ export function GameSlider({ games }: GameSliderProps) {
             <CaretRight
               size={48}
               className={`text-zinc-300 ${
-                instanceRef.current &&
-                instanceRef.current?.track.details?.maxIdx === currentSlide &&
+                (instanceRef.current?.track.details?.maxIdx === currentSlide ||
+                  instanceRef.current?.options?.slides?.perView >=
+                    games.length) &&
                 "opacity-50"
               }`}
             />
