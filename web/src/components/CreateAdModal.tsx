@@ -1,10 +1,11 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Check, GameController } from "phosphor-react";
+import { CaretDown, Check, GameController } from "phosphor-react";
 import { Input } from "./Form/Input";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { FormEvent, useEffect, useState } from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import axios from "axios";
+import * as Select from "@radix-ui/react-select";
 
 interface Game {
   id: string;
@@ -15,6 +16,7 @@ export function CreateAdModal() {
   const [games, setGames] = useState<Game[]>([]);
   const [weekDays, setWeekDays] = useState<string[]>([]);
   const [useVoiceChannel, setUseVoiceChannel] = useState(false);
+  const [gameId, setGameId] = useState("");
 
   useEffect(() => {
     axios("http://localhost:3333/games").then(({ data }) => {
@@ -32,7 +34,7 @@ export function CreateAdModal() {
     }
 
     try {
-      await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
+      await axios.post(`http://localhost:3333/games/${gameId}/ads`, {
         name: data.name,
         yearsPlaying: Number(data.yearsPlaying),
         discord: data.discord,
@@ -48,6 +50,13 @@ export function CreateAdModal() {
     }
   }
 
+  function getGameNameById(id: string): string {
+    const [selectedGame] = games.filter((game) => game.id === id);
+    return selectedGame.title;
+  }
+
+  console.log(gameId);
+
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
@@ -60,25 +69,46 @@ export function CreateAdModal() {
             <label htmlFor="game" className="font-semibold">
               Qual o game?
             </label>
-            <select
-              defaultValue=""
-              id="game"
-              name="game"
-              placeholder="Selecione o game que deseja jogar"
-              className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 appearance-none"
-            >
-              <option value="">Selecione o game que deseja jogar</option>
-              {games.map((game) => {
-                return (
-                  <option key={game.id} value={game.id}>
-                    {game.title}
-                  </option>
-                );
-              })}
-            </select>
+            <Select.Root value={gameId} onValueChange={setGameId}>
+              <Select.Trigger className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 appearance-none w-full flex justify-between items-center">
+                <Select.Value>
+                  <span
+                    className={`${gameId ? "text-white" : "text-zinc-400"}`}
+                  >
+                    {gameId
+                      ? getGameNameById(gameId)
+                      : "Selecione o game que deseja jogar"}
+                  </span>
+                </Select.Value>
+                <Select.Icon>
+                  <CaretDown size={24} className="text-zinc-400" />
+                </Select.Icon>
+              </Select.Trigger>
+
+              <Select.Portal>
+                <Select.Content className="rounded p-2 bg-zinc-900 bg-opacity-[0.98] border-violet-500 border-2">
+                  <Select.Viewport className="flex flex-col gap-2">
+                    {games.map((game) => {
+                      return (
+                        <Select.Item
+                          value={game.id}
+                          key={game.id}
+                          className="text-zinc-200 cursor-pointer hover:bg-violet-500 rounded p-1 font-medium"
+                        >
+                          <Select.ItemText>{game.title}</Select.ItemText>
+                          <Select.ItemIndicator />
+                        </Select.Item>
+                      );
+                    })}
+                  </Select.Viewport>
+                </Select.Content>
+              </Select.Portal>
+            </Select.Root>
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="name">Seu nome (ou nickname)</label>
+            <label htmlFor="name" className="font-semibold">
+              Seu nome (ou nickname)
+            </label>
             <Input
               id="name"
               name="name"
@@ -88,7 +118,9 @@ export function CreateAdModal() {
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label htmlFor="yearsPlaying">Joga a quantos anos</label>
+              <label htmlFor="yearsPlaying" className="font-semibold">
+                Joga a quantos anos
+              </label>
               <Input
                 id="yearsPlaying"
                 name="yearsPlaying"
@@ -97,7 +129,9 @@ export function CreateAdModal() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="discord">Qual seu discord</label>
+              <label htmlFor="discord" className="font-semibold">
+                Qual seu discord
+              </label>
               <Input
                 id="discord"
                 name="discord"
@@ -109,8 +143,11 @@ export function CreateAdModal() {
 
           <div className="flex gap-6">
             <div className="flex flex-col gap-2">
-              <label htmlFor="weekDays">Quando costuma jogar?</label>
+              <label htmlFor="weekDays" className="font-semibold">
+                Quando costuma jogar?
+              </label>
               <ToggleGroup.Root
+                id="weekDays"
                 value={weekDays}
                 type="multiple"
                 className="grid grid-cols-4 gap-2"
@@ -182,7 +219,9 @@ export function CreateAdModal() {
               </ToggleGroup.Root>
             </div>
             <div className="flex flex-col gap-2 flex-1">
-              <label htmlFor="hourStart">Qual horário do dia?</label>
+              <label htmlFor="hourStart" className="font-semibold">
+                Qual horário do dia?
+              </label>
               <div className="grid grid-cols-2 gap-2">
                 <Input
                   id="hourStart"
