@@ -13,7 +13,7 @@
 </p>
 
 <div align="center">
-<img align="center" src="https://i.ibb.co/F6Ts2h4/Capa.png" with="300px" height="300px" />
+<img align="center" src="https://i.ibb.co/F6Ts2h4/Capa.png" />
 </div>
 <br>
 
@@ -55,8 +55,10 @@ Technologies that were used on this application:
 
 From project's root file:
 
-### Backend 
+### Backend
+
 Remember to keep it running while web/mobile application are being used
+
 ```sh
 $ cd server
 $ yarn
