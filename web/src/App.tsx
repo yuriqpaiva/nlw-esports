@@ -41,14 +41,12 @@ function App() {
       <GameSlider games={games} />
 
       {games.length === 0 && (
-        <div className="mt-16 h-[240px]">
           <Lottie
             animationData={gameControlLottie}
             loop={true}
             play
-            style={{ height: 240 }}
+            style={{ height: 240, width: 180 }}
           />
-        </div>
       )}
 
       <Dialog.Root>

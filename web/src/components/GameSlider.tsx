@@ -68,36 +68,42 @@ export function GameSlider({ games }: GameSliderProps) {
           );
         })}
       </div>
-      <button
-        className="absolute -left-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)]"
-        disabled={currentSlide === 0}
-        onClick={(e: any) => {
-          e.stopPropagation() || instanceRef.current?.prev();
-        }}
-      >
-        <CaretLeft
-          size={48}
-          className={`text-zinc-300 transition-opacity ${
-            currentSlide === 0 && "opacity-50"
-          }`}
-        />
-      </button>
-      <button
-        className="absolute -right-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)]"
-        disabled={instanceRef.current?.track.details?.maxIdx === currentSlide}
-        onClick={(e: any) => {
-          e.stopPropagation() || instanceRef.current?.next();
-        }}
-      >
-        <CaretRight
-          size={48}
-          className={`text-zinc-300 ${
-            instanceRef.current &&
-            instanceRef.current?.track.details?.maxIdx === currentSlide &&
-            "opacity-50"
-          }`}
-        />
-      </button>
+      {games.length > 0 && (
+        <>
+          <button
+            className="absolute -left-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)]"
+            disabled={currentSlide === 0}
+            onClick={(e: any) => {
+              e.stopPropagation() || instanceRef.current?.prev();
+            }}
+          >
+            <CaretLeft
+              size={48}
+              className={`text-zinc-300 transition-opacity ${
+                currentSlide === 0 && "opacity-50"
+              }`}
+            />
+          </button>
+          <button
+            className="absolute -right-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)]"
+            disabled={
+              instanceRef.current?.track.details?.maxIdx === currentSlide
+            }
+            onClick={(e: any) => {
+              e.stopPropagation() || instanceRef.current?.next();
+            }}
+          >
+            <CaretRight
+              size={48}
+              className={`text-zinc-300 ${
+                instanceRef.current &&
+                instanceRef.current?.track.details?.maxIdx === currentSlide &&
+                "opacity-50"
+              }`}
+            />
+          </button>
+        </>
+      )}
     </div>
   );
 }
