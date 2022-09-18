@@ -19,7 +19,7 @@ export function CreateAdModal() {
   const [gameId, setGameId] = useState("");
 
   useEffect(() => {
-    axios("http://localhost:3333/games").then(({ data }) => {
+    axios("http://192.168.5.227:3333/games").then(({ data }) => {
       setGames(data);
     });
   }, []);
@@ -34,7 +34,7 @@ export function CreateAdModal() {
     }
 
     try {
-      await axios.post(`http://localhost:3333/games/${gameId}/ads`, {
+      await axios.post(`http://192.168.5.227:3333/games/${gameId}/ads`, {
         name: data.name,
         yearsPlaying: Number(data.yearsPlaying),
         discord: data.discord,
@@ -58,7 +58,7 @@ export function CreateAdModal() {
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
-      <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg sm:w-[480px] w-full sm:max-h-[651px] sm:overflow-hidden overflow-scroll h-full shadow-black/25">
+      <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:rounded-lg sm:w-[480px] w-full sm:max-h-[651px] sm:overflow-hidden overflow-scroll h-full shadow-black/25">
         <Dialog.Title className="text-3xl font-black">
           Publique um anúncio
         </Dialog.Title>
@@ -84,7 +84,7 @@ export function CreateAdModal() {
               </Select.Trigger>
 
               <Select.Portal>
-                <Select.Content className="rounded p-2 bg-zinc-900 bg-opacity-[0.98] border-violet-500 border-2">
+                <Select.Content className="rounded p-2 bg-zinc-900 bg-opacity-[0.98] border-violet-500 border-2 z-10">
                   <Select.ScrollUpButton>
                     <CaretUp size={32} className="text-zinc-300" />
                   </Select.ScrollUpButton>
@@ -120,7 +120,7 @@ export function CreateAdModal() {
               placeholder="Como te chamam dentro do game?"
             />
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="sm:grid sm:grid-cols-2 flex flex-col sm:gap-2 gap-4">
             <div className="flex flex-col gap-2">
               <label htmlFor="yearsPlaying" className="font-semibold">
                 Joga a quantos anos
@@ -145,7 +145,7 @@ export function CreateAdModal() {
             </div>
           </div>
 
-          <div className="flex gap-6">
+          <div className="sm:grid sm:grid-cols-2 flex flex-col sm:gap-2 gap-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="weekDays" className="font-semibold">
                 Quando costuma jogar?
@@ -154,7 +154,7 @@ export function CreateAdModal() {
                 id="weekDays"
                 value={weekDays}
                 type="multiple"
-                className="grid grid-cols-4 gap-2"
+                className="sm:grid sm:grid-cols-4 gap-2 flex"
                 onValueChange={setWeekDays}
               >
                 <ToggleGroup.Item
