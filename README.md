@@ -19,11 +19,11 @@
 
 ## 💡 Introduction
 
-Monorepo of Full-stack application to find your duo at your favorite game.
+Full-stack application monorepo to find your duo at your favorite game.
 
 1. Check all available games and it's Ads
 2. Create an Ad for your favorite game and wait for a duo
-3. View Ads and get your duo's discord ID
+3. View each game Ads and get your duo's discord ID
 
 <br>
 
