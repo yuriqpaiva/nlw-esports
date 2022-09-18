@@ -54,7 +54,7 @@ export function GameSlider({ games }: GameSliderProps) {
     <div className="relative w-full flex justify-center">
       <div
         ref={sliderRef}
-        className="sm:mt-16 mt-12 relative max-w-[1200px] flex overflow-hidden w-full "
+        className="sm:mt-16 mt-12 relative max-w-[1200px] flex w-full md:overflow-hidden"
       >
         {games.map((game, index) => {
           return (
@@ -71,7 +71,7 @@ export function GameSlider({ games }: GameSliderProps) {
       {games.length > 0 && (
         <>
           <button
-            className="absolute -left-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)]"
+            className="absolute -left-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)] md:block hidden"
             disabled={currentSlide === 0}
             onClick={(e: any) => {
               e.stopPropagation() || instanceRef.current?.prev();
@@ -85,7 +85,7 @@ export function GameSlider({ games }: GameSliderProps) {
             />
           </button>
           <button
-            className="absolute -right-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)]"
+            className="absolute -right-14 sm:top-[calc(4rem+90px)] top-[calc(3rem+90px)] md:block hidden"
             disabled={
               instanceRef.current?.track.details?.maxIdx === currentSlide ||
               instanceRef.current?.options?.slides?.perView >= games.length

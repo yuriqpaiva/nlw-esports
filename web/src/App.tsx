@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <div className="max-w-[1344px] mx-auto flex flex-col items-center sm:my-20 my-12 px-16">
+    <div className="max-w-[1344px] mx-auto flex flex-col items-center sm:my-20 my-12 px-16 overflow-hidden">
       <img src={logoImg} className="sm:w-[286px] w-[180px]"/>
 
       <h1 className="xl:text-6xl lg:text-5xl sm:text-4xl text-3xl text-white font-black sm:mt-20 mt-12 text-center">
