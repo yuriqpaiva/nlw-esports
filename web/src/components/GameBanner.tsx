@@ -20,7 +20,7 @@ export function GameBanner({
     >
       <img
         src={bannerUrl}
-        className="group-hover:scale-110 transition-all duration-300 object-cover w-full h-full"
+        className="md:group-hover:scale-110 transition-all duration-300 object-cover w-full h-full"
       />
       <div className="w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0">
         <strong className="font-bold text-white block">{title}</strong>
