@@ -16,7 +16,7 @@ export function GameBanner({
 }: GameBannerProps) {
   return (
     <div
-      className={`relative group overflow-hidden rounded-lg w-[180px] h-[240px] keen-slider__slide`}
+      className={`relative group overflow-hidden rounded-lg w-[180px] sm:h-[240px] h-[280px] keen-slider__slide`}
     >
       <img
         src={bannerUrl}
