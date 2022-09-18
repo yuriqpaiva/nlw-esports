@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="./web/src/assets/logo.svg" alt="Logo Next Level Week Return" width="250px"/>
+   <img src="./web/src/assets/logo.svg" alt="Logo Next Level Week E-Sports" width="250px"/>
 </p>
 
 <p align="center">
@@ -12,8 +12,9 @@
   <img alt="GitHub" src="https://img.shields.io/github/license/yuriqpaiva/feedget?color=red">
 </p>
 
-![image](https://i.ibb.co/F6Ts2h4/Capa.png)
-
+<div align="center">
+<img align="center" src="https://i.ibb.co/F6Ts2h4/Capa.png" with="300px" height="300px" />
+</div>
 <br>
 
 ## 💡 Introduction
